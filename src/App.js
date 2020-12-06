@@ -23,9 +23,15 @@ function App() {
 
 	return (
 		<div className="App">
-			{stars.map((star, index) => {
-				return <p key={index}>{star.name}</p>;
-			})}
+			{stars
+				.sort((a, b) => (a.numberOfPlanets < b.numberOfPlanets ? 1 : -1))
+				.map((star, index) => {
+					return (
+						<p key={index}>
+							<span>Star system name: {star.name}</span>, <span>{star.numberOfPlanets} planets</span>, <span>{star.distance} years from Earth.</span>
+						</p>
+					);
+				})}
 		</div>
 	);
 }

@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useEffect, useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [stars, setStars] = useState([]);
+	console.log(process.env.REACT_APP_STARS_API);
+	const loadSystems = () => {
+		fetch(process.env.REACT_APP_STARS_API)
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+				setStars(data._embedded.stars);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
+	useEffect(() => {
+		loadSystems();
+	}, []);
+
+	return (
+		<div className="App">
+			{stars.map((star, index) => {
+				return <p key={index}>{star.name}</p>;
+			})}
+		</div>
+	);
 }
 
 export default App;

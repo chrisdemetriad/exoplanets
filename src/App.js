@@ -1,9 +1,20 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 
-function App() {
+const Modal = ({ planets }) => {
+	return (
+		<div>
+			{planets.map((planet, index) => {
+				return <p key={index}>{planet.name}</p>;
+			})}
+		</div>
+	);
+};
+
+const App = () => {
 	const [starSystem, setStarSystems] = useState([]);
 	const [starDetails, setStarDetails] = useState([]);
+	const [modal, setModal] = useState(false);
 
 	console.log(process.env.REACT_APP_STARS_API);
 	const loadStarSystems = () => {
@@ -38,7 +49,8 @@ function App() {
 
 	return (
 		<div className="App">
-			{starDetails.length > 0 && <p>{starDetails[0].name}</p>}
+			{modal && <Modal planets={starDetails} />}
+			{!modal && null}
 			{starSystem
 				.sort((a, b) => (a.numberOfPlanets < b.numberOfPlanets ? 1 : -1))
 				.map((star, index) => {
@@ -47,6 +59,7 @@ function App() {
 							key={index}
 							onClick={() => {
 								loadStarDetails(star._links.planets.href);
+								setModal(true);
 							}}
 						>
 							<span>
@@ -58,6 +71,6 @@ function App() {
 				})}
 		</div>
 	);
-}
+};
 
 export default App;

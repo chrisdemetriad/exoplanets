@@ -18,7 +18,7 @@ const App = () => {
 
 	console.log(process.env.REACT_APP_STARS_API);
 	const loadStarSystems = () => {
-		fetch(process.env.REACT_APP_STARS_API + "?size=40")
+		fetch(process.env.REACT_APP_STARS_API + "?size=40&sort=numberOfPlanets,desc")
 			.then((res) => {
 				return res.json();
 			})
@@ -51,24 +51,22 @@ const App = () => {
 		<div className="App">
 			{modal && <Modal planets={starDetails} />}
 			{!modal && null}
-			{starSystem
-				.sort((a, b) => (a.numberOfPlanets < b.numberOfPlanets ? 1 : -1))
-				.map((star, index) => {
-					return (
-						<p
-							key={index}
-							onClick={() => {
-								loadStarDetails(star._links.planets.href);
-								setModal(true);
-							}}
-						>
-							<span>
-								[{index}] Star system name: {star.name}
-							</span>
-							, <span>{star.numberOfPlanets} planets</span>, <span>{star.distance} years from Earth.</span>, <span>{star._links.planets.href}</span>
-						</p>
-					);
-				})}
+			{starSystem.map((star, index) => {
+				return (
+					<p
+						key={index}
+						onClick={() => {
+							loadStarDetails(star._links.planets.href);
+							setModal(true);
+						}}
+					>
+						<span>
+							[{index}] Star system name: {star.name}
+						</span>
+						, <span>{star.numberOfPlanets} planets</span>, <span>{star.distance} years from Earth.</span>, <span>{star._links.planets.href}</span>
+					</p>
+				);
+			})}
 		</div>
 	);
 };

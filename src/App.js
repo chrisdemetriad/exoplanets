@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Modal = ({ planets }) => {
 	return (
@@ -16,7 +16,35 @@ const App = () => {
 	const [starDetails, setStarDetails] = useState([]);
 	const [modal, setModal] = useState(false);
 
-	console.log(process.env.REACT_APP_STARS_API);
+	const [data, setData] = useState([]);
+	const [search, setSearch] = useState(localStorage.getItem("searchTerm") || "");
+
+	const handleChange = (event) => {
+		setSearch(event.target.value);
+		localStorage.setItem("searchTerm", event.target.value);
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		getData();
+	};
+
+	const clearSearchTerm = () => {
+		localStorage.removeItem("searchTerm");
+		setSearch("");
+		getData();
+	};
+
+	const getData = async () => {
+		try {
+			const data = await fetch(process.env.REACT_APP_ALTERNATENAME_API + `?name=%25${search}%25`);
+			const response = await data.json();
+			setData(response._embedded.alternateNames);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const loadStarSystems = () => {
 		fetch(process.env.REACT_APP_STARS_API + "?size=40&sort=numberOfPlanets,desc")
 			.then((res) => {
@@ -29,7 +57,7 @@ const App = () => {
 				console.log(error);
 			});
 	};
-
+	console.log(data);
 	useEffect(() => {
 		loadStarSystems();
 	}, []);
@@ -49,6 +77,21 @@ const App = () => {
 
 	return (
 		<div className="App">
+			<p onClick={clearSearchTerm} title="Go home and clear search">
+				Exoplanets search results
+			</p>
+
+			<form onSubmit={handleSubmit}>
+				{search && <p onClick={clearSearchTerm}>clear search term</p>}
+
+				<input onChange={handleChange} type="text" placeholder={search} />
+
+				<button>Search</button>
+			</form>
+			{search ? <p>Search results shown for {search}</p> : <p>No search results</p>}
+			{data.map((star, index) => (
+				<p key={index}>{star.name}</p>
+			))}
 			{modal && <Modal planets={starDetails} />}
 			{!modal && null}
 			{starSystem.map((star, index) => {

@@ -19,6 +19,9 @@ const App = () => {
 	const [data, setData] = useState([]);
 	const [search, setSearch] = useState(localStorage.getItem("searchTerm") || "");
 
+	const [page, setPage] = useState(1);
+	const [lastPage, setLastPage] = useState(1);
+
 	const handleChange = (event) => {
 		setSearch(event.target.value);
 		localStorage.setItem("searchTerm", event.target.value);
@@ -45,22 +48,25 @@ const App = () => {
 		}
 	};
 
-	const loadStarSystems = () => {
-		fetch(process.env.REACT_APP_STARS_API + "?size=40&sort=numberOfPlanets,desc")
+	const loadStarSystems = (page) => {
+		fetch(process.env.REACT_APP_STARS_API + `?size=100&sort=numberOfPlanets,desc&page=${page}`)
 			.then((res) => {
 				return res.json();
 			})
 			.then((data) => {
 				setStarSystems(data._embedded.stars);
+
+				setPage(data.page.number);
+				setLastPage(data.page.totalPages);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	};
-	console.log(data);
+
 	useEffect(() => {
-		loadStarSystems();
-	}, []);
+		loadStarSystems(page);
+	}, [page]);
 
 	const loadStarDetails = (url) => {
 		fetch(url)
@@ -88,12 +94,32 @@ const App = () => {
 
 				<button>Search</button>
 			</form>
+
 			{search ? <p>Search results shown for {search}</p> : <p>No search results</p>}
 			{data.map((star, index) => (
 				<p key={index}>{star.name}</p>
 			))}
 			{modal && <Modal planets={starDetails} />}
 			{!modal && null}
+
+			<div>
+				<button disabled={page === 1} onClick={() => loadStarSystems(1)}>
+					First
+				</button>
+				<button disabled={page === 1} onClick={() => loadStarSystems(page - 1)}>
+					Previous
+				</button>
+				<span>
+					Page {page} from {lastPage}
+				</span>
+				<button disabled={page === lastPage} onClick={() => loadStarSystems(page + 1)}>
+					Next
+				</button>
+				<button disabled={page === lastPage} onClick={() => loadStarSystems(lastPage)}>
+					Last
+				</button>
+			</div>
+
 			{starSystem.map((star, index) => {
 				return (
 					<p

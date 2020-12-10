@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
+import Pagination from "./Pagination";
+import StarSystem from "./StarSystem";
 
 const Home = () => {
 	const [starSystem, setStarSystems] = useState([]);
@@ -43,43 +45,14 @@ const Home = () => {
 	};
 
 	return (
-		<div className="App">
+		<div className="listing">
 			{modal && <Modal planets={starDetails} />}
 			{!modal && null}
 
-			<div>
-				<button disabled={page === 1} onClick={() => loadStarSystems(1)}>
-					First
-				</button>
-				<button disabled={page === 1} onClick={() => loadStarSystems(page - 1)}>
-					Previous
-				</button>
-				<span>
-					Page {page} from {lastPage}
-				</span>
-				<button disabled={page === lastPage} onClick={() => loadStarSystems(page + 1)}>
-					Next
-				</button>
-				<button disabled={page === lastPage} onClick={() => loadStarSystems(lastPage)}>
-					Last
-				</button>
-			</div>
+			<Pagination page={page} lastPage={lastPage} loadStarSystems={loadStarSystems} />
 
 			{starSystem.map((star, index) => {
-				return (
-					<p
-						key={index}
-						onClick={() => {
-							loadStarDetails(star._links.planets.href);
-							setModal(true);
-						}}
-					>
-						<span>
-							[{index}] Star system name: {star.name}
-						</span>
-						, <span>{star.numberOfPlanets} planets</span>, <span>{star.distance} years from Earth.</span>, <span>{star._links.planets.href}</span>
-					</p>
-				);
+				return <StarSystem key={index} star={star} loadStarDetails={loadStarDetails} setModal={setModal} />;
 			})}
 		</div>
 	);

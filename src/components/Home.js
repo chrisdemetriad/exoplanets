@@ -73,10 +73,11 @@ const Home = () => {
 				<Pagination page={page} lastPage={lastPage} loadStarSystems={loadStarSystems} planetsNumber={planetsNumber} />
 			</div>
 
-			{starSystem.map((star, index) => {
-				return <StarSystem key={index} star={star} loadStarDetails={loadStarDetails} setModal={setModal} />;
-			})}
-
+			<div className="star-systems">
+				{starSystem.map((star, index) => {
+					return <StarSystem key={index} star={star} loadStarDetails={loadStarDetails} setModal={setModal} />;
+				})}
+			</div>
 			{modal && <Modal planets={starDetails} />}
 			{!modal && <p>Nada</p>}
 		</div>

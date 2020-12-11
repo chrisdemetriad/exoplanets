@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from "react";
-import Modal from "./Modal";
 import Pagination from "./Pagination";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 import StarSystem from "./StarSystem";
+import Modal from "./Modal";
 
 const Home = () => {
-	const [starSystem, setStarSystems] = useState([]);
-	const [starDetails, setStarDetails] = useState([]);
 	const [modal, setModal] = useState(false);
+	const [starDetails, setStarDetails] = useState([]);
 
-	const [page, setPage] = useState(1);
-	const [lastPage, setLastPage] = useState(1);
+	const sliderValues = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9 };
+
+	const [starSystem, setStarSystems] = useState([]);
+
+	const [planetsNumber, setPlanetsNumber] = useState(1);
+	const [page, setPage] = useState(0);
+	const [lastPage, setLastPage] = useState("");
 
 	useEffect(() => {
-		loadStarSystems(page);
-	}, [page]);
+		console.clear();
+		console.log(`useEffect, page is ${page} and planetsNumber is ${planetsNumber}`);
+		loadStarSystems(page, planetsNumber);
+	}, [page, planetsNumber]);
 
-	const loadStarSystems = (page) => {
-		fetch(process.env.REACT_APP_STARS_API + `?size=100&sort=numberOfPlanets,desc&page=${page}`)
+	const loadStarSystems = (page, planetsNumber) => {
+		console.log(`loadStarSystems, page is ${page} and planetsNumber is ${planetsNumber}`);
+		fetch(process.env.REACT_APP_STARS_API + `?numberOfPlanets=${planetsNumber}&size=10&sort=numberOfPlanets,desc&page=${page}`)
 			.then((res) => {
 				return res.json();
 			})
@@ -46,14 +55,30 @@ const Home = () => {
 
 	return (
 		<div className="listing">
-			{modal && <Modal planets={starDetails} />}
-			{!modal && null}
+			<div>
+				<Slider
+					min={1}
+					defaultValue={1}
+					marks={sliderValues}
+					step={null}
+					onChange={(e) => {
+						setPlanetsNumber(e);
+						setPage(0);
+					}}
+				/>
+			</div>
+			<br />
 
-			<Pagination page={page} lastPage={lastPage} loadStarSystems={loadStarSystems} />
+			<div>
+				<Pagination page={page} lastPage={lastPage} loadStarSystems={loadStarSystems} planetsNumber={planetsNumber} />
+			</div>
 
 			{starSystem.map((star, index) => {
 				return <StarSystem key={index} star={star} loadStarDetails={loadStarDetails} setModal={setModal} />;
 			})}
+
+			{modal && <Modal planets={starDetails} />}
+			{!modal && <p>Nada</p>}
 		</div>
 	);
 };

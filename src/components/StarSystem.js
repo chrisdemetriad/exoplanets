@@ -17,9 +17,15 @@ const StarSystem = ({ star, loadStarDetails, setModal }) => {
 				setModal(true);
 			}}
 		>
-			<p>Star system name: {star.name}</p>
-			<p>{star.numberOfPlanets} planets</p>
-			<p>{star.distance} years from Earth.</p>
+			<p className="star-system-name">
+				<span>Star System</span> <span>{star.name}</span>
+			</p>
+			<p>
+				<span>Planets</span> <span>{star.numberOfPlanets}</span>
+			</p>
+			<p>
+				<span>Distance from Earth</span> <span>{star.distance}</span>
+			</p>
 			{/* <p>{star._links.planets.href}</p> */}
 		</div>
 	);

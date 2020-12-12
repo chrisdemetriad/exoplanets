@@ -25,7 +25,7 @@ const Home = () => {
 
 	const loadStarSystems = (page, planetsNumber) => {
 		console.log(`loadStarSystems, page is ${page} and planetsNumber is ${planetsNumber}`);
-		fetch(process.env.REACT_APP_STARS_API + `?numberOfPlanets=${planetsNumber}&size=10&sort=numberOfPlanets,desc&page=${page}`)
+		fetch(process.env.REACT_APP_STARS_API + `?numberOfPlanets=${planetsNumber}&size=25&sort=numberOfPlanets,desc&page=${page}`)
 			.then((res) => {
 				return res.json();
 			})
@@ -54,33 +54,36 @@ const Home = () => {
 	};
 
 	return (
-		<div className="listing">
-			<div>
-				<Slider
-					min={1}
-					defaultValue={1}
-					marks={sliderValues}
-					step={null}
-					onChange={(e) => {
-						setPlanetsNumber(e);
-						setPage(0);
-					}}
-				/>
-			</div>
-			<br />
+		<>
+			<h1>EXOPLANETS</h1>
+			<div className="listing">
+				<div>
+					<Slider
+						min={1}
+						defaultValue={1}
+						marks={sliderValues}
+						step={null}
+						onChange={(e) => {
+							setPlanetsNumber(e);
+							setPage(0);
+						}}
+					/>
+				</div>
+				<br />
 
-			<div>
-				<Pagination page={page} lastPage={lastPage} loadStarSystems={loadStarSystems} planetsNumber={planetsNumber} />
-			</div>
+				<div>
+					<Pagination page={page} lastPage={lastPage} loadStarSystems={loadStarSystems} planetsNumber={planetsNumber} />
+				</div>
 
-			<div className="star-systems">
-				{starSystem.map((star, index) => {
-					return <StarSystem key={index} star={star} loadStarDetails={loadStarDetails} setModal={setModal} />;
-				})}
+				<div className="star-systems">
+					{starSystem.map((star, index) => {
+						return <StarSystem key={index} star={star} loadStarDetails={loadStarDetails} setModal={setModal} />;
+					})}
+				</div>
+				{modal && <Modal planets={starDetails} />}
+				{!modal && <p>Nada</p>}
 			</div>
-			{modal && <Modal planets={starDetails} />}
-			{!modal && <p>Nada</p>}
-		</div>
+		</>
 	);
 };
 

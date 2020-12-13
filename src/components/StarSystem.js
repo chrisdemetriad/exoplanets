@@ -1,7 +1,39 @@
-const StarSystem = ({ star, loadStarDetails, setModal }) => {
+import React, { useState, useEffect, useCallback } from "react";
+import Modal from "./Modal";
+import usePortal from "react-cool-portal";
+
+const StarSystem = ({ star }) => {
+	const [loading, setLoading] = useState(false);
+	const { Portal, isShow, toggle } = usePortal({ defaultShow: false });
+
 	const getRandomNumber = (maximum) => {
 		return Math.floor(Math.random() * Math.floor(maximum));
 	};
+	const buttonCallback = useCallback(() => {
+		loadStarDetails(star._links.planets.href);
+		setModal(true);
+		toggle();
+	}, [toggle]);
+	const toggleModal = () => {
+		setModal(!setModal);
+	};
+	const [starDetails, setStarDetails] = useState([]);
+
+	const loadStarDetails = (url) => {
+		fetch(url)
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+				console.log("xxxxxxxxx", data);
+				setStarDetails(data._embedded.planets);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
+	const [modal, setModal] = useState(false);
 
 	return (
 		<div
@@ -13,10 +45,11 @@ const StarSystem = ({ star, loadStarDetails, setModal }) => {
 			}}
 			className="star-system"
 			onClick={() => {
-				loadStarDetails(star._links.planets.href);
-				setModal(true);
+				buttonCallback();
 			}}
 		>
+			<Portal>{modal && <Modal planets={starDetails} onClose={toggleModal} />}</Portal>
+
 			<p className="star-system-name">
 				<span>Star System</span> <span>{star.name}</span>
 			</p>

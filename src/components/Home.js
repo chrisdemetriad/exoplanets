@@ -3,16 +3,12 @@ import Pagination from "./Pagination";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import StarSystem from "./StarSystem";
-import Modal from "./Modal";
 
 const Home = () => {
 	const sliderValues = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9 };
 
-	const [modal, setModal] = useState(false);
-
 	const [starSystem, setStarSystems] = useState([]);
 	const [planetsNumber, setPlanetsNumber] = useState(1);
-	const [starDetails, setStarDetails] = useState([]);
 
 	const [page, setPage] = useState(0);
 	const [lastPage, setLastPage] = useState("");
@@ -22,10 +18,6 @@ const Home = () => {
 		console.log(`useEffect, page is ${page} and planetsNumber is ${planetsNumber}`);
 		loadStarSystems(page, planetsNumber);
 	}, [page, planetsNumber]);
-
-	const toggleModal = () => {
-		setModal(!setModal);
-	};
 
 	const loadStarSystems = (page, planetsNumber) => {
 		console.log(`loadStarSystems, page is ${page} and planetsNumber is ${planetsNumber}`);
@@ -38,20 +30,6 @@ const Home = () => {
 
 				setPage(data.page.number);
 				setLastPage(data.page.totalPages);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
-
-	const loadStarDetails = (url) => {
-		fetch(url)
-			.then((res) => {
-				return res.json();
-			})
-			.then((data) => {
-				console.log("xxxxxxxxx", data);
-				setStarDetails(data._embedded.planets);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -86,11 +64,9 @@ const Home = () => {
 
 				<div className="star-systems">
 					{starSystem.map((star, index) => {
-						return <StarSystem key={index} star={star} loadStarDetails={loadStarDetails} setModal={setModal} />;
+						return <StarSystem key={index} star={star} />;
 					})}
 				</div>
-
-				{modal && <Modal planets={starDetails} onClose={toggleModal} />}
 			</div>
 		</>
 	);

@@ -6,14 +6,14 @@ import StarSystem from "./StarSystem";
 import Modal from "./Modal";
 
 const Home = () => {
-	const [modal, setModal] = useState(false);
-	const [starDetails, setStarDetails] = useState([]);
-
 	const sliderValues = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9 };
 
-	const [starSystem, setStarSystems] = useState([]);
+	const [modal, setModal] = useState(false);
 
+	const [starSystem, setStarSystems] = useState([]);
 	const [planetsNumber, setPlanetsNumber] = useState(1);
+	const [starDetails, setStarDetails] = useState([]);
+
 	const [page, setPage] = useState(0);
 	const [lastPage, setLastPage] = useState("");
 
@@ -22,6 +22,10 @@ const Home = () => {
 		console.log(`useEffect, page is ${page} and planetsNumber is ${planetsNumber}`);
 		loadStarSystems(page, planetsNumber);
 	}, [page, planetsNumber]);
+
+	const toggleModal = () => {
+		setModal(!setModal);
+	};
 
 	const loadStarSystems = (page, planetsNumber) => {
 		console.log(`loadStarSystems, page is ${page} and planetsNumber is ${planetsNumber}`);
@@ -46,6 +50,7 @@ const Home = () => {
 				return res.json();
 			})
 			.then((data) => {
+				console.log("xxxxxxxxx", data);
 				setStarDetails(data._embedded.planets);
 			})
 			.catch((error) => {
@@ -53,9 +58,15 @@ const Home = () => {
 			});
 	};
 
+	// const [currentStar, setCurrentStar] = useState([]);
+	// console.log(currentStar);
+
+	// const onClickHandle = (star) => {
+	// 	console.log("xxxxxxx", star);
+	// };
+
 	return (
 		<>
-			<h1>EXOPLANETS</h1>
 			<div className="listing">
 				<div>
 					<Slider
@@ -71,17 +82,15 @@ const Home = () => {
 				</div>
 				<br />
 
-				<div>
-					<Pagination page={page} lastPage={lastPage} loadStarSystems={loadStarSystems} planetsNumber={planetsNumber} />
-				</div>
+				<Pagination page={page} lastPage={lastPage} loadStarSystems={loadStarSystems} planetsNumber={planetsNumber} />
 
 				<div className="star-systems">
 					{starSystem.map((star, index) => {
 						return <StarSystem key={index} star={star} loadStarDetails={loadStarDetails} setModal={setModal} />;
 					})}
 				</div>
-				{modal && <Modal planets={starDetails} />}
-				{!modal && <p>Nada</p>}
+
+				{modal && <Modal planets={starDetails} onClose={toggleModal} />}
 			</div>
 		</>
 	);

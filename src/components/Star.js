@@ -19,7 +19,10 @@ const Star = ({ star }) => {
 
 				{star.distance && (
 					<p>
-						<span>Distance from Earth</span> <span>{star.distance}</span>
+						<span>Distance from Earth</span>{" "}
+						<span>
+							{star.distance} <span className="lowercase">light years</span>
+						</span>
 					</p>
 				)}
 
@@ -39,7 +42,7 @@ const Star = ({ star }) => {
 					<p>
 						<span>Age</span>{" "}
 						<span>
-							{star.age} <span className="lowercase">light years</span>
+							{star.age} <span className="lowercase">million years</span>
 						</span>
 					</p>
 				)}

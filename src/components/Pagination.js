@@ -17,10 +17,10 @@ function Pagination({ page, lastPage, loadStarSystems, planetsNumber }) {
 			) : (
 				<span className="page-info">Pages: {lastPage}</span>
 			)}
-			<button disabled={page === lastPage - 1} onClick={() => loadStarSystems(page + 1, planetsNumber)}>
+			<button disabled={page === lastPage} onClick={() => loadStarSystems(page + 1, planetsNumber)}>
 				Next
 			</button>
-			<button disabled={page === lastPage - 1} onClick={() => loadStarSystems(lastPage - 1, planetsNumber)}>
+			<button disabled={page === lastPage} onClick={() => loadStarSystems(lastPage, planetsNumber)}>
 				Last
 			</button>
 		</div>

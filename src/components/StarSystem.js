@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Modal from "./Modal";
 import usePortal from "react-cool-portal";
 import "./StarSystem.css";
@@ -6,10 +6,11 @@ import "./StarSystem.css";
 const StarSystem = ({ star }) => {
 	const { Portal, toggle } = usePortal({ defaultShow: false });
 	const [modal, setModal] = useState(false);
-
-	const getRandomNumber = (maximum) => {
-		return Math.floor(Math.random() * Math.floor(maximum));
+	const getRandomNumber = () => {
+		return Math.floor(Math.random() * Math.floor(138));
 	};
+	const [randomValue, setRandomValue] = useState(getRandomNumber);
+
 	const buttonCallback = useCallback(() => {
 		loadStarDetails(star._links.planets.href);
 		setModal(true);
@@ -26,7 +27,6 @@ const StarSystem = ({ star }) => {
 				return res.json();
 			})
 			.then((data) => {
-				console.log("xxxxxxxxx", data);
 				setStarDetails(data._embedded.planets);
 			})
 			.catch((error) => {
@@ -37,7 +37,7 @@ const StarSystem = ({ star }) => {
 	return (
 		<div
 			style={{
-				backgroundImage: `url(exoplanets/img${getRandomNumber(138)}.jpg`,
+				backgroundImage: `url(exoplanets/img${randomValue}.jpg`,
 				backgroundPosition: "center",
 				backgroundSize: "cover",
 				backgroundRepeat: "no-repeat",
@@ -60,7 +60,10 @@ const StarSystem = ({ star }) => {
 
 			{star.distance && (
 				<p>
-					<span>Distance from Earth</span> <span>{star.distance}</span>
+					<span>Distance from Earth</span>{" "}
+					<span>
+						{star.distance} <span className="lowercase">light years</span>
+					</span>
 				</p>
 			)}
 
@@ -70,9 +73,13 @@ const StarSystem = ({ star }) => {
 				</p>
 			)}
 
-			{star.mass && (
+			{star.mass != null ? (
 				<p>
 					<span>Mass</span> <span>{star.mass}</span>
+				</p>
+			) : (
+				<p>
+					<span>Mass</span> <span>unknown</span>
 				</p>
 			)}
 
@@ -80,7 +87,7 @@ const StarSystem = ({ star }) => {
 				<p>
 					<span>Age</span>{" "}
 					<span>
-						{star.age} <span className="lowercase">light years</span>
+						{star.age} <span className="lowercase">million years</span>
 					</span>
 				</p>
 			)}

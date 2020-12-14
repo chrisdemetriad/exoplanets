@@ -5,12 +5,10 @@
 
 .star-systems {
 	display: grid;
-	column-count: 5;
-
-	line-height: 0;
-
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	column-count: 4;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-gap: 5px;
+	line-height: 0;
 }
 
 @media (max-width: 1400px) {

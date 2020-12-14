@@ -20,14 +20,14 @@ const Home = () => {
 
 	const loadStarSystems = (page, planetsNumber) => {
 		// console.log(`loadStarSystems, page is ${page} and planetsNumber is ${planetsNumber}`);
-		fetch(process.env.REACT_APP_STARS_API + `?numberOfPlanets=${planetsNumber}&size=25&sort=numberOfPlanets,desc&page=${page}`)
+		fetch(process.env.REACT_APP_STARS_API + `?numberOfPlanets=${planetsNumber}&size=30&sort=numberOfPlanets,desc&page=${page}`)
 			.then((res) => {
 				return res.json();
 			})
 			.then((data) => {
 				setStarSystems(data._embedded.stars);
 				setPage(data.page.number);
-				setLastPage(data.page.totalPages);
+				setLastPage(data.page.totalPages - 1);
 			})
 			.catch((error) => {
 				console.log(error);

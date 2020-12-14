@@ -17,17 +17,23 @@ const Planet = ({ planets }) => {
 							<div>
 								{radius && (
 									<p>
-										<span>Radius: {radius}</span>
+										<span>
+											Radius: {radius} <span className="lowercase">kilometres</span>
+										</span>
 									</p>
 								)}
 								{age && (
 									<p>
-										<span>Age: {age}</span>
+										<span>
+											Age: {age} <span className="lowercase">million years</span>
+										</span>
 									</p>
 								)}
 								{temperature && (
 									<p>
-										<span>Temperature: {temperature}</span>
+										<span>
+											Temperature: {temperature} <span className="lowercase">Kelvin</span>
+										</span>
 									</p>
 								)}
 
@@ -44,7 +50,7 @@ const Planet = ({ planets }) => {
 
 								{discoveryDate && (
 									<p>
-										<span>Discovery date: {discoveryDate}</span>
+										<span>Discovery date: {discoveryDate.split("T")[0]}</span>
 									</p>
 								)}
 							</div>

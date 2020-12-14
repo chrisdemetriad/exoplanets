@@ -1,4 +1,3 @@
-import React from "react";
 import "./Star.css";
 
 const Star = ({ star }) => {
@@ -19,7 +18,7 @@ const Star = ({ star }) => {
 
 				{star.distance && (
 					<p>
-						<span>Distance from Earth</span>{" "}
+						<span>Distance from Earth</span>
 						<span>
 							{star.distance} <span className="lowercase">light years</span>
 						</span>
@@ -40,7 +39,7 @@ const Star = ({ star }) => {
 
 				{star.age && (
 					<p>
-						<span>Age</span>{" "}
+						<span>Age</span>
 						<span>
 							{star.age} <span className="lowercase">million years</span>
 						</span>

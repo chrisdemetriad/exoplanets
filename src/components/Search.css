@@ -1,0 +1,41 @@
+form {
+	text-align: center;
+}
+
+input {
+	font-size: 30px;
+	padding: 15px 5px;
+	outline: 0;
+	border: 1px solid greenyellow;
+	background: transparent;
+	color: white;
+	font-family: "PT Sans Narrow";
+	border-radius: 4px 0px 0px 4px;
+	margin-bottom: 20px;
+}
+
+button {
+	font-size: 30px;
+	padding: 15px 23px;
+	outline: 0;
+	border: 1px solid yellow;
+	background: darkgreen;
+	color: white;
+	font-family: "PT Sans Narrow";
+	text-transform: uppercase;
+	border-radius: 0px 4px 4px 0px;
+	margin-left: -1px;
+	margin-bottom: 20px;
+	opacity: 0.7;
+	transition: 0.3 all;
+	cursor: pointer;
+}
+
+button:hover {
+	opacity: 1;
+}
+
+p {
+	font-family: "PT Sans Narrow";
+	font-size: 30px;
+}

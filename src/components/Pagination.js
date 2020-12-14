@@ -1,7 +1,7 @@
 import React from "react";
 import "./Pagination.css";
 
-function Pagination({ page, lastPage, loadStarSystems, planetsNumber }) {
+const Pagination = ({ page, lastPage, loadStarSystems, planetsNumber }) => {
 	return (
 		<div className="pagination">
 			<button disabled={page === 0} onClick={() => loadStarSystems(0, planetsNumber)}>
@@ -14,8 +14,10 @@ function Pagination({ page, lastPage, loadStarSystems, planetsNumber }) {
 				<span className="page-info">
 					Page {page} from {lastPage}
 				</span>
-			) : (
+			) : lastPage !== 0 ? (
 				<span className="page-info">Pages: {lastPage}</span>
+			) : (
+				<span className="page-info"></span>
 			)}
 			<button disabled={page === lastPage} onClick={() => loadStarSystems(page + 1, planetsNumber)}>
 				Next
@@ -25,6 +27,6 @@ function Pagination({ page, lastPage, loadStarSystems, planetsNumber }) {
 			</button>
 		</div>
 	);
-}
+};
 
 export default Pagination;

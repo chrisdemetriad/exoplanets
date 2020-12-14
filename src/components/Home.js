@@ -6,7 +6,7 @@ import "rc-slider/assets/index.css";
 import "./Home.css";
 
 const Home = () => {
-	const sliderValues = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9 };
+	const sliderValues = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8 };
 
 	const [starSystem, setStarSystems] = useState([]);
 	const [planetsNumber, setPlanetsNumber] = useState(1);
@@ -19,8 +19,7 @@ const Home = () => {
 	}, [page, planetsNumber]);
 
 	const loadStarSystems = (page, planetsNumber) => {
-		// console.log(`loadStarSystems, page is ${page} and planetsNumber is ${planetsNumber}`);
-		fetch(process.env.REACT_APP_STARS_API + `?numberOfPlanets=${planetsNumber}&size=30&sort=numberOfPlanets,desc&page=${page}`)
+		fetch(process.env.REACT_APP_STARS_API + `?numberOfPlanets=${planetsNumber}&size=16&sort=numberOfPlanets,desc&page=${page}`)
 			.then((res) => {
 				return res.json();
 			})
@@ -35,31 +34,32 @@ const Home = () => {
 	};
 
 	return (
-		<>
-			<div className="listing">
-				<div>
-					<Slider
-						min={1}
-						defaultValue={1}
-						marks={sliderValues}
-						step={null}
-						onChange={(e) => {
-							setPlanetsNumber(e);
-							setPage(0);
-						}}
-					/>
-				</div>
-				<br />
-
-				<Pagination page={page} lastPage={lastPage} loadStarSystems={loadStarSystems} planetsNumber={planetsNumber} />
-
-				<div className="star-systems">
-					{starSystem.map((star, index) => {
-						return <StarSystem key={index} star={star} />;
-					})}
-				</div>
+		<div className="listing">
+			<div className="slider">
+				<p>Move slider below to search for a minimum number of planets</p>
+				<Slider
+					min={1}
+					max={8}
+					defaultValue={1}
+					marks={sliderValues}
+					step={null}
+					dotStyle
+					onChange={(e) => {
+						setPlanetsNumber(e);
+						setPage(0);
+					}}
+				/>
 			</div>
-		</>
+			<br />
+
+			<Pagination page={page} lastPage={lastPage} loadStarSystems={loadStarSystems} planetsNumber={planetsNumber} />
+
+			<div className="star-systems">
+				{starSystem.map((star, index) => {
+					return <StarSystem key={index} star={star} />;
+				})}
+			</div>
+		</div>
 	);
 };
 

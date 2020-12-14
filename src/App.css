@@ -9,7 +9,12 @@ body,
 p {
 	margin: 0;
 	padding: 0;
+	height: 100%;
 	color: #eee;
+}
+
+p {
+	height: auto;
 }
 
 img {
@@ -22,6 +27,19 @@ main {
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+
+#root {
+	height: 100%;
+}
+
+main {
+	min-height: 100%;
+	padding-bottom: 100px;
+}
+
+.listing {
+	flex-grow: 1;
 }
 
 .github-corner:hover .octo-arm {

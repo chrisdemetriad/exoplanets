@@ -11,6 +11,39 @@
 	line-height: 0;
 }
 
+.slider {
+	margin: 25px auto;
+	width: 420px;
+	font-family: "PT Sans Narrow";
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.slider p {
+	margin-bottom: 10px;
+}
+
+.rc-slider-handle {
+	width: 20px;
+	height: 20px;
+	background: #d22929;
+	margin-top: -8px;
+}
+
+.rc-slider-dot {
+	bottom: -5px;
+	width: 14px;
+	height: 14px;
+	border: none;
+}
+.rc-slider-dot {
+	background: aquamarine;
+}
+
+.rc-slider-track {
+	background: #d22929;
+}
+
 @media (max-width: 1400px) {
 	.star-systems {
 		grid-template-columns: 1fr 1fr 1fr;

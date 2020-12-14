@@ -7,7 +7,6 @@
 .planet-details {
 	min-height: auto;
 	transform: none;
-	border: none;
 	opacity: 1;
 	padding: 10px;
 
@@ -19,6 +18,7 @@
 	line-height: normal;
 	flex-direction: column;
 	transition: 0.2s all;
+	border-bottom: 1px dashed greenyellow !important;
 }
 
 .planet-details p {

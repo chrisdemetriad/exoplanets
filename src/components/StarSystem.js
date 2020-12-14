@@ -1,25 +1,29 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import Modal from "./Modal";
 import usePortal from "react-cool-portal";
 import "./StarSystem.css";
 
 const StarSystem = ({ star }) => {
+	const url = star._links.planets.href;
 	const { Portal, toggle } = usePortal({ defaultShow: false });
 	const [modal, setModal] = useState(false);
+	const [starDetails, setStarDetails] = useState([]);
+
 	const getRandomNumber = () => {
 		return Math.floor(Math.random() * Math.floor(138));
 	};
-	const [randomValue, setRandomValue] = useState(getRandomNumber);
+
+	const [randomValue] = useState(getRandomNumber);
 
 	const buttonCallback = useCallback(() => {
-		loadStarDetails(star._links.planets.href);
+		loadStarDetails(url);
 		setModal(true);
 		toggle();
-	}, [toggle]);
+	}, [toggle, url]);
+
 	const toggleModal = () => {
 		setModal(!setModal);
 	};
-	const [starDetails, setStarDetails] = useState([]);
 
 	const loadStarDetails = (url) => {
 		fetch(url)
@@ -47,8 +51,6 @@ const StarSystem = ({ star }) => {
 				buttonCallback();
 			}}
 		>
-			<Portal>{modal && <Modal planets={starDetails} star={star} onClose={toggleModal} />}</Portal>
-
 			<p className="star-system-name">
 				<span>Star System</span> <span>{star.name}</span>
 			</p>
@@ -60,7 +62,7 @@ const StarSystem = ({ star }) => {
 
 			{star.distance && (
 				<p>
-					<span>Distance from Earth</span>{" "}
+					<span>Distance from Earth</span>
 					<span>
 						{star.distance} <span className="lowercase">light years</span>
 					</span>
@@ -85,7 +87,7 @@ const StarSystem = ({ star }) => {
 
 			{star.age && (
 				<p>
-					<span>Age</span>{" "}
+					<span>Age</span>
 					<span>
 						{star.age} <span className="lowercase">million years</span>
 					</span>
@@ -96,6 +98,8 @@ const StarSystem = ({ star }) => {
 					<span>Radius</span> <span>{star.radius}</span>
 				</p>
 			)}
+
+			<Portal>{modal && <Modal planets={starDetails} star={star} onClose={toggleModal} />}</Portal>
 		</div>
 	);
 };

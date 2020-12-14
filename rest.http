@@ -1,5 +1,77 @@
-http://webdevelopertest.playfusionservices.com/webapptest/stars?size=60
+http://webdevelopertest.playfusionservices.com/webapptest/stars
+###
+http://webdevelopertest.playfusionservices.com/webapptest/stars?size=40&sort=numberOfPlanets,desc&page=22
+# {?page,size,sort}
+###
+
+http://webdevelopertest.playfusionservices.com/webapptest/stars?page=119&size=20&sort=numberOfPlanets,desc"
+
 
 ###
 
 http://webdevelopertest.playfusionservices.com/webapptest/planets?size=200}
+# {?page,size,sort}
+
+###
+
+http://webdevelopertest.playfusionservices.com/webapptest/stars/123/planets
+
+###
+
+http://webdevelopertest.playfusionservices.com/webapptest/planets/158/star
+
+###
+
+http://webdevelopertest.playfusionservices.com/webapptest/planets/160/star
+
+
+
+###
+http://webdevelopertest.playfusionservices.com/webapptest/alternateNames?size=20&name=BD-00%2332?projection=what
+# {?page,size,sort,projection}
+# &name=BD-00%202332
+###
+
+http://webdevelopertest.playfusionservices.com/webapptest/profile
+
+
+###
+
+http://webdevelopertest.playfusionservices.com/webapptest/stars/search?findByNumberOfPlanetsGreaterThan=3
+
+###
+// returns BY NUMBER OF PLANETS!
+http://webdevelopertest.playfusionservices.com/webapptest/stars/search/findByNumberOfPlanetsGreaterThan?numberOfPlanets=4
+
+
+###
+
+http://webdevelopertest.playfusionservices.com/webapptest/alternateNames
+
+
+###
+
+http://webdevelopertest.playfusionservices.com/webapptest/alternateNames/search/findByNameLike?name=%Majoris%
+
+
+###
+http://webdevelopertest.playfusionservices.com/webapptest/alternateNames/4022/star
+
+
+###
+
+http://webdevelopertest.playfusionservices.com/webapptest/alternateNames/nameStartsWith?name=K
+
+
+
+
+###
+
+
+http://webdevelopertest.playfusionservices.com/webapptest/stars?size=20&sort=numberOfPlanets,desc
+###
+http://webdevelopertest.playfusionservices.com/webapptest/stars/search/findByNumberOfPlanetsGreaterThan?numberOfPlanets=5&size=20&sort=numberOfPlanets,desc
+
+###
+
+http://webdevelopertest.playfusionservices.com/webapptest/stars/search/findByNumberOfPlanetsGreaterThan?numberOfPlanets=7&size=10&sort=numberOfPlanets,desc?page=0

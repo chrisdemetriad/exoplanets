@@ -5,51 +5,57 @@ const Planet = ({ planets }) => {
 		<>
 			{planets.map(({ name, radius, age, temperature, mass, discoveryMethod, description, discoveryDate }, index) => {
 				return (
-					<div className="planet">
+					<div className="planet-details" key={index}>
 						{name && (
-							<p>
-								<span>{name}</span>
-							</p>
-						)}
-						{radius && (
-							<p>
-								<span>{radius}</span>
-							</p>
-						)}
-						{age && (
-							<p>
-								<span>{age}</span>
-							</p>
-						)}
-						{temperature && (
-							<p>
-								<span>{temperature}</span>
+							<p className="name">
+								<span>Planet {index + 1}</span> <span>{name}</span>
 							</p>
 						)}
 
-						{discoveryMethod && (
-							<p>
-								<span>{discoveryMethod}</span>
-							</p>
-						)}
+						<div className="flex">
+							<div className="">
+								{radius && (
+									<p>
+										<span>Radius: {radius}</span>
+									</p>
+								)}
+								{age && (
+									<p>
+										<span>Age: {age}</span>
+									</p>
+								)}
+								{temperature && (
+									<p>
+										<span>Temperature: {temperature}</span>
+									</p>
+								)}
 
-						{mass && (
-							<p>
-								<span>{mass}</span>
-							</p>
-						)}
+								{mass && (
+									<p>
+										<span>Mass: {mass}</span>
+									</p>
+								)}
+								{discoveryMethod && (
+									<p>
+										<span>Discovery method: {discoveryMethod}</span>
+									</p>
+								)}
 
-						{description && (
-							<p>
-								<span>{description}</span>
-							</p>
-						)}
-
-						{discoveryDate && (
-							<p>
-								<span>{discoveryDate}</span>
-							</p>
-						)}
+								{discoveryDate && (
+									<p>
+										<span>Discovery date: {discoveryDate}</span>
+									</p>
+								)}
+							</div>
+							<div>
+								{" "}
+								{description && (
+									<p>
+										<span>Description: {description}</span>
+									</p>
+								)}
+							</div>
+						</div>
 					</div>
 				);
 			})}

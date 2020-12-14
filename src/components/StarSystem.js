@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Modal from "./Modal";
 import usePortal from "react-cool-portal";
 
 const StarSystem = ({ star }) => {
-	const [loading, setLoading] = useState(false);
-	const { Portal, isShow, toggle } = usePortal({ defaultShow: false });
+	const { Portal, toggle } = usePortal({ defaultShow: false });
+	const [modal, setModal] = useState(false);
 
 	const getRandomNumber = (maximum) => {
 		return Math.floor(Math.random() * Math.floor(maximum));
@@ -33,8 +33,6 @@ const StarSystem = ({ star }) => {
 			});
 	};
 
-	const [modal, setModal] = useState(false);
-
 	return (
 		<div
 			style={{
@@ -48,7 +46,7 @@ const StarSystem = ({ star }) => {
 				buttonCallback();
 			}}
 		>
-			<Portal>{modal && <Modal planets={starDetails} onClose={toggleModal} />}</Portal>
+			<Portal>{modal && <Modal planets={starDetails} star={star} onClose={toggleModal} />}</Portal>
 
 			<p className="star-system-name">
 				<span>Star System</span> <span>{star.name}</span>

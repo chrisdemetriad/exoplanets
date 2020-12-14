@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import Planet from "./Planet";
+import Star from "./Star";
 
-const Modal = ({ planets, onClose }) => {
+const Modal = ({ star, planets, onClose }) => {
 	useEffect(() => {
 		function onEscape(event) {
 			if (event.keyCode === 27) {
@@ -21,10 +22,9 @@ const Modal = ({ planets, onClose }) => {
 	return (
 		<div className="modal-container">
 			<div className="modal">
+				<div className="close" onClick={onClose}></div>
+				<Star star={star} />
 				<Planet planets={planets} />
-				<button type="button" onClick={onClose}>
-					Close this modal
-				</button>
 			</div>
 		</div>
 	);

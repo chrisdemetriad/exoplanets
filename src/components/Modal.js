@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Planet from "./Planet";
 import Star from "./Star";
+import "./Modal.css";
 
 const Modal = ({ star, planets, onClose }) => {
 	useEffect(() => {

@@ -1,0 +1,49 @@
+.planet-details .star-system-name span {
+	font-size: 20px;
+}
+
+.planet-details:first-child {
+	font-size: 40px;
+}
+
+.planet-details:hover {
+	transform: none;
+	/* border: none; */
+}
+
+.planet-details .name {
+	font-size: 26px;
+	text-align: right;
+	text-transform: uppercase;
+	flex-direction: column;
+	color: greenyellow;
+	display: flex;
+	background: black;
+	opacity: 0.7;
+}
+
+.planet-details .name span:first-of-type {
+	color: white;
+	margin-bottom: -6px;
+	font-size: 17px;
+}
+
+.flex {
+	display: flex;
+	justify-content: space-between;
+	flex: 0 0 auto;
+	align-items: center;
+}
+
+.flex div:first-child {
+	min-width: 340px;
+}
+
+.star-system-name {
+	display: flex;
+	flex-direction: column;
+	color: greenyellow;
+	background: black;
+	opacity: 0.7;
+	padding: 0 10px;
+}

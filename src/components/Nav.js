@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
+import "./Nav.css";
 
 const Nav = () => {
 	return (
 		<nav>
 			<ul>
 				<li>
-					{" "}
 					<NavLink to="/search" activeClassName="active">
 						<h2>Search</h2>
 					</NavLink>

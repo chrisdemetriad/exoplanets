@@ -1,11 +1,12 @@
 import React from "react";
+import "./Star.css";
 
 const Star = ({ star }) => {
 	return (
 		<>
 			<div className="planet-details planet-star">
 				{star.name && (
-					<p className="star-system-name ">
+					<p className="star-system-name">
 						<span>Star System</span> <span>{star.name}</span>
 					</p>
 				)}

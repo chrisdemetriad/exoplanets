@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Modal from "./Modal";
 import usePortal from "react-cool-portal";
+import "./StarSystem.css";
 
 const StarSystem = ({ star }) => {
 	const { Portal, toggle } = usePortal({ defaultShow: false });

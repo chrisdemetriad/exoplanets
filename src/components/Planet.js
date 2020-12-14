@@ -1,4 +1,5 @@
 import React from "react";
+import "./Planet.css";
 
 const Planet = ({ planets }) => {
 	return (
@@ -13,7 +14,7 @@ const Planet = ({ planets }) => {
 						)}
 
 						<div className="flex">
-							<div className="">
+							<div>
 								{radius && (
 									<p>
 										<span>Radius: {radius}</span>
@@ -48,7 +49,6 @@ const Planet = ({ planets }) => {
 								)}
 							</div>
 							<div>
-								{" "}
 								{description && (
 									<p>
 										<span>Description: {description}</span>

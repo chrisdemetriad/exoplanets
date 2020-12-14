@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "./Pagination";
+import StarSystem from "./StarSystem";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import StarSystem from "./StarSystem";
+import "./Home.css";
 
 const Home = () => {
 	const sliderValues = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9 };
@@ -14,20 +15,17 @@ const Home = () => {
 	const [lastPage, setLastPage] = useState("");
 
 	useEffect(() => {
-		console.clear();
-		console.log(`useEffect, page is ${page} and planetsNumber is ${planetsNumber}`);
 		loadStarSystems(page, planetsNumber);
 	}, [page, planetsNumber]);
 
 	const loadStarSystems = (page, planetsNumber) => {
-		console.log(`loadStarSystems, page is ${page} and planetsNumber is ${planetsNumber}`);
+		// console.log(`loadStarSystems, page is ${page} and planetsNumber is ${planetsNumber}`);
 		fetch(process.env.REACT_APP_STARS_API + `?numberOfPlanets=${planetsNumber}&size=25&sort=numberOfPlanets,desc&page=${page}`)
 			.then((res) => {
 				return res.json();
 			})
 			.then((data) => {
 				setStarSystems(data._embedded.stars);
-
 				setPage(data.page.number);
 				setLastPage(data.page.totalPages);
 			})
@@ -35,13 +33,6 @@ const Home = () => {
 				console.log(error);
 			});
 	};
-
-	// const [currentStar, setCurrentStar] = useState([]);
-	// console.log(currentStar);
-
-	// const onClickHandle = (star) => {
-	// 	console.log("xxxxxxx", star);
-	// };
 
 	return (
 		<>

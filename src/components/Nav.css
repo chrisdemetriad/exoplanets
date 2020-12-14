@@ -1,0 +1,23 @@
+ul {
+	display: flex;
+	justify-content: space-between;
+	margin: 0;
+}
+
+li a {
+	color: white;
+	text-decoration: none;
+}
+
+li a.active {
+	color: aquamarine;
+}
+
+h1,
+h2 {
+	font-family: "Barlow", cursive;
+	font-size: 80px;
+	text-align: right;
+	transform: skew(4deg);
+	margin: 30px 20px;
+}

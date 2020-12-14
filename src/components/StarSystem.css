@@ -1,0 +1,49 @@
+.star-system {
+	cursor: pointer;
+	font-family: "PT Sans Narrow", sans-serif;
+	font-weight: 100;
+	display: flex;
+	justify-content: flex-end;
+	line-height: normal;
+	flex-direction: column;
+	min-height: 320px;
+	position: relative;
+	border: 1px solid black;
+	opacity: 0.8;
+	transition: 0.2s all;
+	transform: skew(4deg);
+}
+
+.star-system:hover {
+	opacity: 1;
+	transform: skew(2deg);
+	border: 1px solid yellow;
+}
+
+.star-system p {
+	font-size: 17px;
+	background: #030325;
+	opacity: 0.7;
+	display: flex;
+	text-transform: uppercase;
+	justify-content: space-between;
+	padding: 0px 4px;
+}
+
+.star-system-name {
+	/* position: absolute;
+	top: 10px;
+	left: 10px; */
+	display: flex;
+	flex-direction: column;
+	color: greenyellow;
+	background: black;
+	opacity: 0.7;
+	padding: 0 10px;
+}
+
+.star-system-name span:nth-child(2) {
+	font-size: 30px;
+	color: white;
+	margin-top: -12px;
+}

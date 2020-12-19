@@ -1,5 +1,7 @@
 # Exoplanets
 
+[Demo](http://absent-alley.surge.sh/).
+
 ## How to get it running
 
 1. Clone the repo.
@@ -7,8 +9,6 @@
 3. Run `npm install` to install deps.
 4. Run `npm start` to start the project.
 5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The application is not responsive, and should display correctly using Chrome (minimum 900px width).
 
 ### Images
 
